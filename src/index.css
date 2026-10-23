@@ -1,0 +1,284 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------- Fonts (same families used by the reference template) ---------- */
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('/fonts/PlayfairDisplay-Variable.ttf') format('truetype-variations');
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Viaoda Libre';
+  src: url('/fonts/ViaodaLibre-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'The Nautigal';
+  src: url('/fonts/TheNautigal-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Uchen';
+  src: url('/fonts/Uchen-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Ms Madi';
+  src: url('/fonts/MsMadiAmpersand-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: u+26;
+}
+
+@font-face {
+  font-family: 'Lora';
+  src: url('/fonts/Lora-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'EB Garamond';
+  src: url('/fonts/EBGaramond-Variable.ttf') format('truetype-variations');
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- Theme tokens ---------- */
+:root {
+  --ink: #593d2c;
+  --paper: #f7f5ee;
+  --cream: #ece4d8;
+  --ink-soft: rgba(89, 61, 44, 0.72);
+  --serif: 'Baskerville', 'Times New Roman', serif;
+  --times: 'Times New Roman', serif;
+  --display: 'Viaoda Libre', 'EB Garamond', serif;
+  --title: 'Playfair Display', 'Times New Roman', serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: #ffffff;
+  color: var(--ink);
+  font-family: var(--serif);
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+/* ---------- Paper texture overlay ---------- */
+.paper-grain {
+  background-image: url('/images/themes/minimalism-dark-brown/paper.webp');
+  background-size: 666px 1000px;
+  background-repeat: repeat;
+  background-position: top left;
+  mix-blend-mode: multiply;
+}
+
+/* ---------- Motion ---------- */
+@keyframes dbrFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(var(--dbr-float, -8px));
+  }
+}
+
+.dbr-float {
+  animation: dbrFloat var(--dbr-duration, 7.3s) ease-in-out infinite;
+  animation-delay: var(--dbr-delay, 0s);
+  will-change: transform;
+}
+
+@keyframes ambientFall {
+  0% {
+    transform: translate3d(0, -10%, 0) rotate(0deg);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.55;
+  }
+  50% {
+    transform: translate3d(var(--sway, 16px), 55vh, 0) rotate(180deg);
+  }
+  88% {
+    opacity: 0.45;
+  }
+  100% {
+    transform: translate3d(calc(var(--sway, 16px) * -0.6), 108vh, 0) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.ambient-petal {
+  animation: ambientFall var(--fall-duration, 24s) linear infinite;
+  animation-delay: var(--fall-delay, 0s);
+}
+
+@keyframes sealPulse {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    box-shadow: 0 4px 20px rgba(89, 61, 44, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.3);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.05);
+    box-shadow: 0 6px 28px rgba(89, 61, 44, 0.65), inset 0 2px 4px rgba(255, 255, 255, 0.3);
+  }
+}
+
+.seal-pulse {
+  animation: sealPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-160%);
+  }
+  55%,
+  100% {
+    transform: translateX(420%);
+  }
+}
+
+.btn-shine {
+  animation: shine 3.4s ease-in-out infinite;
+}
+
+@keyframes giftBob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1deg);
+  }
+  50% {
+    transform: translateY(-9px) rotate(1deg);
+  }
+}
+
+.gift-bob {
+  animation: giftBob 3.6s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(0.82) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.12) rotate(18deg);
+  }
+}
+
+.gift-sparkle {
+  animation: sparkle var(--sparkle-duration, 2.8s) ease-in-out infinite;
+  animation-delay: var(--sparkle-delay, 0s);
+}
+
+@keyframes confettiBurst {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--confetti-x, 0px), var(--confetti-y, -120px), 0)
+      rotate(var(--confetti-rotate, 220deg));
+  }
+}
+
+.gift-confetti {
+  animation: confettiBurst 1.5s ease-out forwards;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-up {
+  animation: fadeUp 0.9s ease-out both;
+}
+
+@keyframes firework {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.9);
+  }
+}
+
+.firework {
+  animation: firework 1.6s ease-out forwards;
+}
+
+/* ---------- Scrollbars inside the invitation ---------- */
+.soft-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(89, 61, 44, 0.3) transparent;
+}
+
+.soft-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.soft-scroll::-webkit-scrollbar-thumb {
+  background: rgba(89, 61, 44, 0.3);
+  border-radius: 999px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dbr-float,
+  .ambient-petal,
+  .seal-pulse,
+  .btn-shine,
+  .gift-bob,
+  .gift-sparkle,
+  .gift-confetti,
+  .fade-up,
+  .firework {
+    animation: none !important;
+  }
+}
