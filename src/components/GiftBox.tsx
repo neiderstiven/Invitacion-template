@@ -142,7 +142,7 @@ export function GiftBox({ qrDataUrl }: GiftBoxProps) {
               {decor.map((item) => (
                 <img
                   key={item.src}
-                  src={`/images/giftbox/mini/${item.src}.webp`}
+                  src={`${import.meta.env.BASE_URL}images/giftbox/mini/${item.src}.webp`}
                   alt=""
                   aria-hidden="true"
                   loading="lazy"
@@ -159,7 +159,7 @@ export function GiftBox({ qrDataUrl }: GiftBoxProps) {
               ))}
 
               <img
-                src="/images/giftbox/minimalism_darkbrown.webp"
+                src={`${import.meta.env.BASE_URL}images/giftbox/minimalism_darkbrown.webp`}
                 alt=""
                 aria-hidden="true"
                 loading="lazy"

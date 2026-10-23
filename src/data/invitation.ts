@@ -1,4 +1,8 @@
-export const THEME = '/images/themes/minimalism-dark-brown'
+// BASE_URL termina en '/', así que respeta el subpath de GitHub Pages
+// (/Invitacion-template/) y la raíz en local o en un dominio propio.
+const base = import.meta.env.BASE_URL
+
+export const THEME = `${base}images/themes/minimalism-dark-brown`
 
 export const wedding = {
   couple: {
@@ -77,13 +81,13 @@ export const wedding = {
 }
 
 export const photos = [
-  { src: '/images/photos/photo4.webp', alt: 'Facundo y Delfina en el jardín' },
-  { src: '/images/photos/photo1.webp', alt: 'Los novios abrazados al atardecer' },
-  { src: '/images/photos/photo2.webp', alt: 'Retrato de los novios entre flores' },
-  { src: '/images/photos/photo3.webp', alt: 'Los novios caminando de la mano' },
+  { src: `${base}images/photos/photo4.webp`, alt: 'Facundo y Delfina en el jardín' },
+  { src: `${base}images/photos/photo1.webp`, alt: 'Los novios abrazados al atardecer' },
+  { src: `${base}images/photos/photo2.webp`, alt: 'Retrato de los novios entre flores' },
+  { src: `${base}images/photos/photo3.webp`, alt: 'Los novios caminando de la mano' },
 ]
 
-export const envelopePhoto = '/images/photos/photo1.webp'
+export const envelopePhoto = `${base}images/photos/photo1.webp`
 
 export type Wish = {
   id: string
