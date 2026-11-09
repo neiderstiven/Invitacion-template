@@ -1,68 +1,6 @@
 import type { CSSProperties } from 'react'
-import { THEME, wedding } from '../data/invitation'
+import { THEME, invitation } from '../data/invitation'
 import { CardTitle, SectionCard } from './SectionCard'
-
-function DateBlock() {
-  return (
-    <div className="flex items-center justify-center gap-4 font-body text-cream">
-      <span
-        className="text-[50px] leading-none md:text-[57px]"
-        style={{ fontFamily: 'Baskerville, "Times New Roman", serif' }}
-      >
-        {wedding.date.day}
-      </span>
-      <div
-        className="h-[46px] w-px"
-        style={{ backgroundColor: 'rgba(236,228,216,0.45)' }}
-        aria-hidden="true"
-      />
-      <div className="flex flex-col items-start justify-center gap-1 text-left">
-        <span
-          className="text-[14px] uppercase md:text-[18px]"
-          style={{ fontFamily: '"Times New Roman", serif', color: '#ece4d8' }}
-        >
-          {wedding.date.month}
-        </span>
-        <span
-          className="text-[14px] uppercase md:text-[18px]"
-          style={{ fontFamily: '"Times New Roman", serif', color: '#ece4d8' }}
-        >
-          {wedding.date.year}
-        </span>
-      </div>
-    </div>
-  )
-}
-
-function EventBlock({
-  label,
-  place,
-  timeLabel,
-}: {
-  label: string
-  place: string
-  timeLabel: string
-}) {
-  return (
-    <div className="flex flex-col items-center gap-4 text-center md:gap-5">
-      <div style={{ color: 'rgba(236,228,216,0.7)' }}>
-        <span className="whitespace-pre-line text-center text-[16px] font-normal md:text-[18px]">
-          {label}
-          {'\n'}
-          {place}
-        </span>
-      </div>
-      <div
-        className="flex min-w-max items-center justify-between gap-x-3 whitespace-nowrap px-0 text-[12px] uppercase md:text-[14px]"
-        style={{ color: 'rgba(236,228,216,0.7)', maxWidth: 220 }}
-      >
-        <span>{timeLabel}</span>
-        <span>{wedding.date.weekday}</span>
-      </div>
-      <DateBlock />
-    </div>
-  )
-}
 
 export function Ceremony() {
   return (
@@ -113,99 +51,29 @@ export function Ceremony() {
 
       <SectionCard
         radius="rounded-[13px]"
-        contentClassName="flex flex-col items-center gap-6 px-5 pb-10 pt-9 text-center"
+        contentClassName="flex flex-col items-center gap-6 px-6 pb-12 pt-10 text-center"
       >
-        <CardTitle>INFO DE LA CEREMONIA</CardTitle>
-
-        <div className="relative grid grid-cols-[1fr_auto_1fr] grid-rows-[repeat(4,auto)] justify-center gap-x-4 gap-y-[3px] text-center font-body text-cream">
-          <div className="row-span-4 grid min-w-0 grid-rows-subgrid justify-items-center">
-            <span className="text-[12px]" style={{ color: 'rgba(236,228,216,0.7)' }}>
-              {wedding.families.left.prefix}
-            </span>
-            {wedding.families.left.names.map((name) => (
-              <span
-                key={name}
-                className="text-[12px] font-semibold"
-                style={{ color: '#ece4d8', overflowWrap: 'anywhere' }}
-              >
-                {name}
-              </span>
-            ))}
-          </div>
-
-          <div
-            className="row-span-4 h-[50px] w-px shrink-0 self-center"
-            style={{ backgroundColor: 'rgba(236,228,216,0.4)' }}
-            aria-hidden="true"
-          />
-
-          <div className="row-span-4 grid min-w-0 grid-rows-subgrid justify-items-center">
-            <span className="text-[12px]" style={{ color: 'rgba(236,228,216,0.7)' }}>
-              {wedding.families.right.prefix}
-            </span>
-            {wedding.families.right.names.map((name) => (
-              <span
-                key={name}
-                className="text-[12px] font-semibold"
-                style={{ color: '#ece4d8', overflowWrap: 'anywhere' }}
-              >
-                {name}
-              </span>
-            ))}
-          </div>
-        </div>
+        <CardTitle>{invitation.event.title}</CardTitle>
 
         <p
-          className="mx-auto whitespace-pre-line text-center text-[12px] leading-relaxed md:max-w-[560px] md:text-[13px]"
+          className="text-center text-[16px] leading-relaxed md:text-[18px]"
           style={{ fontFamily: 'Baskerville, "Times New Roman", serif', color: '#ece4d8' }}
         >
-          {wedding.families.blessing}
+          {invitation.event.subtitle}
         </p>
 
-        <div className="relative flex w-full min-w-0 flex-col items-center gap-3 text-center md:gap-4">
-          <h3
-            className="flex min-h-[80px] w-[80%] items-center justify-center whitespace-nowrap leading-[52px] md:leading-[60px]"
-            style={{ fontSize: 43, fontFamily: '"Viaoda Libre", cursive', color: '#ece4d8' }}
-          >
-            {wedding.couple.firstFull}
-          </h3>
-          <div
-            className="text-[10px] uppercase"
-            style={{
-              color: 'rgba(236,228,216,0.7)',
-              fontFamily: 'Uchen, Baskerville, serif',
-              letterSpacing: '0.14em',
-            }}
-          />
-          <div
-            className="text-[35px]"
-            style={{ color: '#ece4d8', fontFamily: '"Ms Madi", cursive' }}
-          >
-            {wedding.couple.ampersand}
-          </div>
-          <h3
-            className="flex min-h-[80px] w-[80%] items-center justify-center whitespace-nowrap leading-[52px] md:leading-[60px]"
-            style={{ fontSize: 43, fontFamily: '"Viaoda Libre", cursive', color: '#ece4d8' }}
-          >
-            {wedding.couple.secondFull}
-          </h3>
-        </div>
-
         <div
-          className="relative flex flex-col items-center gap-4 text-center md:gap-5"
-          style={{ fontFamily: 'Baskerville, "Times New Roman", serif' }}
+          aria-hidden="true"
+          className="h-px w-16"
+          style={{ backgroundColor: 'rgba(236,228,216,0.4)' }}
+        />
+
+        <p
+          className="mx-auto whitespace-pre-line text-center text-[13px] leading-relaxed md:max-w-[500px] md:text-[15px]"
+          style={{ fontFamily: 'Baskerville, "Times New Roman", serif', color: '#ece4d8' }}
         >
-          <EventBlock
-            label={wedding.ceremony.label}
-            place={wedding.ceremony.place}
-            timeLabel={wedding.ceremony.timeLabel}
-          />
-          <EventBlock
-            label={wedding.reception.label}
-            place={wedding.reception.place}
-            timeLabel={wedding.reception.timeLabel}
-          />
-        </div>
+          {invitation.event.paragraph}
+        </p>
       </SectionCard>
     </section>
   )

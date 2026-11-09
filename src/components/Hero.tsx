@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react'
-import { THEME, envelopePhoto, wedding } from '../data/invitation'
+import { THEME, envelopePhoto, invitation, logoImage } from '../data/invitation'
 import { Petals } from './Petals'
 
 export function Hero() {
@@ -21,7 +21,7 @@ export function Hero() {
           letterSpacing: '0.14em',
         }}
       >
-        {wedding.hero.kicker}
+        {invitation.event.phrase}
       </p>
 
       <img
@@ -53,7 +53,7 @@ export function Hero() {
             <div className="aspect-[232/206] rotate-[3.92deg] border-[5px] border-white bg-white shadow-[2px_2px_4px_rgba(0,0,0,0.25)] md:border-[7px]">
               <img
                 src={envelopePhoto}
-                alt="Facundo y Delfina"
+                alt=""
                 className="h-full w-full object-cover"
                 loading="eager"
               />
@@ -135,56 +135,27 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="relative z-10 mt-[26%] flex w-full max-w-[330px] flex-col items-center gap-[10px] md:max-w-[420px]">
-        <div className="relative w-full">
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-x-0 top-[8px] flex items-start justify-center gap-[11%]"
-          >
-            <img
-              src={`${THEME}/goldenline-decoration.webp`}
-              alt=""
-              className="block w-[9%] max-w-[40px] object-contain"
-            />
-            <img
-              src={`${THEME}/goldenline-decoration.webp`}
-              alt=""
-              className="block w-[9%] max-w-[40px] -scale-x-100 object-contain"
-            />
-          </div>
-          <p
-            className="relative leading-none text-ink"
-            style={{
-              fontFamily: '"Viaoda Libre", "The Nautigal", cursive',
-              fontSize: 'clamp(30px, 10.2vw, 45px)',
-            }}
-          >
-            {wedding.couple.first}
-          </p>
-        </div>
+      <div className="relative z-10 mt-[26%] flex w-full max-w-[330px] flex-col items-center gap-2 md:max-w-[420px]">
+        <img
+          src={logoImage}
+          alt={invitation.event.logo}
+          loading="eager"
+          className="mx-auto block w-[140px] md:w-[180px]"
+        />
 
-        <span
-          className="block leading-none"
-          style={{
-            fontFamily: '"Ms Madi", cursive',
-            color: '#827771',
-            fontSize: 'clamp(38px, 11.3vw, 50px)',
-          }}
+        <p
+          className="text-center text-[15px] leading-relaxed text-ink/80 md:text-[17px]"
+          style={{ fontFamily: 'Lora, Baskerville, serif' }}
         >
-          {wedding.couple.ampersand}
-        </span>
+          {invitation.event.subtitle}
+        </p>
 
-        <div className="w-full">
-          <p
-            className="leading-none text-ink"
-            style={{
-              fontFamily: '"Viaoda Libre", "The Nautigal", cursive',
-              fontSize: 'clamp(30px, 10.2vw, 45px)',
-            }}
-          >
-            {wedding.couple.second}
-          </p>
-        </div>
+        <p
+          className="text-center text-[13px] tracking-[0.08em] text-ink/65 md:text-[14px]"
+          style={{ fontFamily: '"Times New Roman", serif' }}
+        >
+          {invitation.event.dateLong}
+        </p>
       </div>
     </header>
   )

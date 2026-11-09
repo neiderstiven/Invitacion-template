@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react'
 import { useEffect, useMemo, useState } from 'react'
-import { THEME, wedding } from '../data/invitation'
+import { THEME, invitation } from '../data/invitation'
 import { CardTitle, SectionCard } from './SectionCard'
 
 function useCountdown(targetIso: string) {
@@ -24,11 +24,12 @@ function useCountdown(targetIso: string) {
 
 const weekDays = ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá', 'Do']
 
-/** September 2027 starts on a Wednesday. */
-const septemberOffset = 2
-const septemberDays = 30
-
 function MiniCalendar() {
+  const { dayNumber, monthIndex, monthName, yearNumber } = invitation.date
+  const firstWeekday = new Date(yearNumber, monthIndex, 1).getDay()
+  const leadingDays = (firstWeekday + 6) % 7
+  const daysInMonth = new Date(yearNumber, monthIndex + 1, 0).getDate()
+
   return (
     <div
       className="mt-3 mx-auto w-fit max-w-full overflow-hidden rounded-[10px] px-4 pb-4 pt-2"
@@ -43,7 +44,7 @@ function MiniCalendar() {
             fontSize: 25,
           }}
         >
-          Septiembre 2027
+          {monthName} {yearNumber}
         </div>
         <div className="grid grid-cols-7 border-b-2" style={{ borderColor: '#593D2C' }}>
           {weekDays.map((day) => (
@@ -53,12 +54,12 @@ function MiniCalendar() {
           ))}
         </div>
         <div className="grid grid-cols-7 gap-y-0.5 px-1 py-2">
-          {Array.from({ length: septemberOffset }).map((_, index) => (
+          {Array.from({ length: leadingDays }).map((_, index) => (
             <div key={`empty-${index}`} className="flex h-[30px] items-center justify-center md:h-[34px]" />
           ))}
-          {Array.from({ length: septemberDays }, (_, index) => index + 1).map((day) => (
+          {Array.from({ length: daysInMonth }, (_, index) => index + 1).map((day) => (
             <div key={day} className="flex h-[30px] items-center justify-center md:h-[34px]">
-              {day === 18 ? (
+              {day === dayNumber ? (
                 <div className="relative flex h-[24px] w-[26px] items-center justify-center md:h-[28px] md:w-[30px]">
                   <svg
                     viewBox="0 0 24 22"
@@ -84,7 +85,7 @@ function MiniCalendar() {
 }
 
 export function Reception() {
-  const { days, hours, minutes, seconds, done } = useCountdown(wedding.date.iso)
+  const { days, hours, minutes, seconds, done } = useCountdown(invitation.date.iso)
 
   return (
     <section className="relative isolate z-10 mx-auto mb-4 w-[88%] max-w-[420px] md:max-w-[560px]">
@@ -132,101 +133,49 @@ export function Reception() {
         </span>
       </span>
 
-      <SectionCard contentClassName="flex flex-col items-center gap-6 px-5 py-9 text-center">
-        <CardTitle>INFO DE LA RECEPCIÓN</CardTitle>
+      <SectionCard contentClassName="flex flex-col items-center gap-5 px-5 py-9 text-center">
+        <CardTitle>Cuenta regresa</CardTitle>
 
         <div
-          className="flex flex-col items-center gap-4 text-center md:gap-5"
-          style={{ fontFamily: 'Baskerville, "Times New Roman", serif', color: '#ece4d8' }}
+          className="text-center text-sm md:text-lg"
+          style={{ color: 'rgba(236,228,216,0.7)' }}
         >
-          <h3 className="flex flex-col items-center text-[20px] font-normal uppercase text-cream md:text-[26px]">
-            {wedding.reception.intro}
-          </h3>
-
-          <div
-            className="flex min-w-max items-center justify-between gap-x-3 whitespace-nowrap text-[13px] uppercase md:text-[15px]"
-            style={{ color: 'rgba(236,228,216,0.7)', maxWidth: 170 }}
-          >
-            <span>{wedding.ceremony.time}</span>
-            <span>{wedding.date.weekday}</span>
-          </div>
-
-          <div className="flex items-center justify-center gap-4">
-            <span
-              className="text-[50px] leading-none md:text-[57px]"
-              style={{ fontFamily: 'Baskerville, "Times New Roman", serif', color: '#ece4d8' }}
-            >
-              {wedding.date.day}
-            </span>
-            <div
-              className="h-[46px] w-px"
-              style={{ backgroundColor: 'rgba(236,228,216,0.45)' }}
-              aria-hidden="true"
-            />
-            <div className="flex flex-col items-start justify-center gap-1 text-left">
-              <span
-                className="text-[12px] uppercase md:text-[16px]"
-                style={{ fontFamily: '"Times New Roman", serif', color: '#ece4d8' }}
-              >
-                {wedding.date.month}
-              </span>
-              <span
-                className="text-[18px] md:text-[24px]"
-                style={{ fontFamily: '"Times New Roman", serif', color: '#ece4d8' }}
-              >
-                {wedding.date.year}
-              </span>
-            </div>
-          </div>
-
-          <div className="mt-4 flex items-center justify-center gap-8">
-            <div className="flex flex-col items-center">
-              <span className="text-xs uppercase tracking-wider" style={{ color: 'rgba(236,228,216,0.7)' }}>
-                Bienvenida
-              </span>
-              <span className="mt-1 text-lg font-medium md:text-xl">{wedding.reception.welcomeTime}</span>
-            </div>
-            <div className="flex flex-col items-center">
-              <span className="text-xs uppercase tracking-wider" style={{ color: 'rgba(236,228,216,0.7)' }}>
-                Recepción
-              </span>
-              <span className="mt-1 text-lg font-medium md:text-xl">{wedding.reception.receptionTime}</span>
-            </div>
-          </div>
-
-          <div className="mt-4 flex flex-col items-center justify-center">
-            <h2 className="uppercase" style={{ color: 'rgba(236,228,216,0.7)' }}>
-              Cuenta Regresiva
-            </h2>
-            <div
-              className="mt-2 text-center text-sm md:text-lg"
-              style={{ color: 'rgba(236,228,216,0.7)' }}
-            >
-              {done ? (
-                <p>¡Llegó el gran día!</p>
-              ) : (
-                <p className="flex items-baseline justify-center gap-1.5 tabular-nums">
-                  <span className="text-cream">{days}</span>
-                  <span className="text-[10px] uppercase md:text-xs">días</span>
-                  <span className="mx-0.5 text-cream/50">·</span>
-                  <span className="text-cream">{String(hours).padStart(2, '0')}</span>
-                  <span className="text-[10px] uppercase md:text-xs">h</span>
-                  <span className="mx-0.5 text-cream/50">·</span>
-                  <span className="text-cream">{String(minutes).padStart(2, '0')}</span>
-                  <span className="text-[10px] uppercase md:text-xs">m</span>
-                  <span className="mx-0.5 text-cream/50">·</span>
-                  <span className="text-cream">{String(seconds).padStart(2, '0')}</span>
-                  <span className="text-[10px] uppercase md:text-xs">s</span>
-                </p>
-              )}
-            </div>
-          </div>
+          {done ? (
+            <p>¡Llegó el gran día!</p>
+          ) : (
+            <p className="flex items-baseline justify-center gap-1.5 tabular-nums">
+              <span className="text-cream">{String(days).padStart(2, '0')}</span>
+              <span className="text-[10px] uppercase md:text-xs">días</span>
+              <span className="mx-0.5 text-cream/50">·</span>
+              <span className="text-cream">{String(hours).padStart(2, '0')}</span>
+              <span className="text-[10px] uppercase md:text-xs">h</span>
+              <span className="mx-0.5 text-cream/50">·</span>
+              <span className="text-cream">{String(minutes).padStart(2, '0')}</span>
+              <span className="text-[10px] uppercase md:text-xs">m</span>
+              <span className="mx-0.5 text-cream/50">·</span>
+              <span className="text-cream">{String(seconds).padStart(2, '0')}</span>
+              <span className="text-[10px] uppercase md:text-xs">s</span>
+            </p>
+          )}
         </div>
+
+        <div
+          aria-hidden="true"
+          className="mt-1 h-px w-20"
+          style={{ backgroundColor: 'rgba(236,228,216,0.4)' }}
+        />
+
+        <h2
+          className="uppercase"
+          style={{ color: 'rgba(236,228,216,0.7)', fontFamily: 'Baskerville, "Times New Roman", serif' }}
+        >
+          calendario
+        </h2>
 
         <MiniCalendar />
 
         <a
-          href={wedding.calendarUrl}
+          href={invitation.calendarUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center justify-center font-title text-sm text-cream underline decoration-cream/40 underline-offset-4 transition-colors hover:decoration-cream"

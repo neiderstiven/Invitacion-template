@@ -4,153 +4,68 @@ const base = import.meta.env.BASE_URL
 
 export const THEME = `${base}images/themes/minimalism-dark-brown`
 
-export const wedding = {
-  couple: {
-    first: 'Facundo',
-    second: 'Delfina',
-    firstFull: 'Facundo Lastra Quiroga',
-    secondFull: 'Delfina Zubiría Alcorta',
-    ampersand: '&',
-  },
-  hero: {
-    kicker: 'Nuestra Boda',
-    invitationLine: 'Les Invitamos Cordialmente',
+export const invitation = {
+  event: {
+    logo: '15 Años',
+    title: '15 AÑOS',
+    subtitle: 'Asociación Sur de Bogotá',
+    phrase: 'Celebremos juntos',
+    dateLong: 'Diciembre 12, 2026',
+    paragraph:
+      'La Asociación Sur de Bogotá tiene el privilegio de invitarte a celebrar juntos con gratitud 15 años de bondad, cuidado y misericordia.',
+    closing:
+      'Gracias por hacer parte de nuestra historia y por sumarte a esta gran celebración de gratitud.',
+    verse: {
+      reference: '1 Tesalonicenses 5:18',
+      text: '«Dad gracias en todo, porque esta es la voluntad de Dios para con vosotros en Cristo Jesús».',
+    },
   },
   date: {
-    iso: '2027-09-18T17:30:00-03:00',
-    day: '18',
-    month: 'SEPTIEMBRE',
-    year: '2027',
-    weekday: 'SÁBADO',
-    long: '18 de septiembre de 2027',
+    iso: '2026-12-12T00:00:00-05:00',
+    day: '12',
+    dayNumber: 12,
+    month: 'DICIEMBRE',
+    monthName: 'Diciembre',
+    monthIndex: 11,
+    year: '2026',
+    yearNumber: 2026,
+    long: 'Diciembre 12, 2026',
   },
-  families: {
-    left: {
-      prefix: 'Sr. y Sra.',
-      names: ['Facundo Lastra Quiroga', 'Luciana Lastra Quiroga'],
-    },
-    right: {
-      prefix: 'Sr. y Sra.',
-      names: ['Matías Zubiría Alcorta', 'Delfina Zubiría Alcorta'],
-    },
-    blessing:
-      'Con la bendición de nuestras familias, queremos compartir con ustedes el día en que comenzamos nuestra vida juntos.',
-  },
-  ceremony: {
-    label: 'CEREMONIA RELIGIOSA',
-    place: 'Basílica de San Francisco',
-    time: '17:30',
-    timeLabel: 'A LAS 17:30',
-  },
-  reception: {
-    label: 'RECEPCIÓN',
-    place: 'Bodega Salentein',
-    city: 'Mendoza',
-    time: '19:00',
-    timeLabel: 'A LAS 19:00',
-    intro: 'La recepción se llevará a cabo a las:',
-    welcomeTime: '16:30',
-    receptionTime: '19:00',
-  },
-  map: {
-    // OpenStreetMap embed keeps the section usable without a private API key.
-    embedUrl:
-      'https://www.openstreetmap.org/export/embed.html?bbox=-69.3200%2C-33.7600%2C-69.2300%2C-33.6900&layer=mapnik&marker=-33.7250%2C-69.2750',
-    directionsUrl: 'https://www.google.com/maps/dir/?api=1&destination=Bodega+Salentein,+Mendoza',
+  participation: {
+    title: 'Invitación de participación',
+    paragraph:
+      'Queremos con gratitud que nos unamos en una ofrenda que sin duda fortalecera nuestra Asociación.',
+    qrLabel: 'QR de donación',
   },
   calendarUrl:
-    'https://www.google.com/calendar/render?action=TEMPLATE&text=Boda%20de%20Facundo%20Lastra%20Quiroga%20y%20Delfina%20Zub%C3%ADr%C3%ADa%20Alcorta&dates=20270918T203000Z/20270919T040000Z&details=Tenemos%20el%20honor%20de%20invitarles%20a%20la%20boda%20de%20Facundo%20Lastra%20Quiroga%20y%20Delfina%20Zubir%C3%ADa%20Alcorta%20en%20Bodega%20Salentein%0AMendoza&location=Bodega%20Salentein%2C%20Mendoza',
-  dressCode: {
-    title: 'DRESS CODE',
-    subtitle: 'Vestimenta para la fiesta',
-    palette: ['#432b14', '#6b533c', '#e3cbb4'],
-  },
-  program: [
-    { time: '17:30', label: 'Ceremonia religiosa' },
-    { time: '19:00', label: 'Cóctel de bienvenida', icon: 'alcohol' },
-    { time: '20:00', label: 'Entrada de los novios', icon: 'cake' },
-    { time: '20:30', label: 'Cena', icon: 'bird' },
-    { time: '21:30', label: 'Primer baile' },
-    { time: '23:00', label: 'Fiesta' },
-  ],
-  gift: {
-    paypalHandle: '@bodademo',
-    paypalUrl: 'https://paypal.me/bodademo',
-    note: 'Su presencia será el mejor regalo que podríamos recibir.',
-  },
+    'https://www.google.com/calendar/render?action=TEMPLATE&text=15%20A%C3%B1os%20-%20Asociaci%C3%B3n%20Sur%20de%20Bogot%C3%A1&dates=20261212/20261213&details=La%20Asociaci%C3%B3n%20Sur%20de%20Bogot%C3%A1%20tiene%20el%20privilegio%20de%20invitarte%20a%20celebrar%20juntos%20con%20gratitud%2015%20a%C3%B1os%20de%20bondad%2C%20cuidado%20y%20misericordia.',
 }
+
+export const logoImage = encodeURI(`${base}Fotos/LOGO 15 AÑOS.png`)
+export const qrImage = encodeURI(`${base}Fotos/Pago QR.png`)
 
 export const photos = [
-  { src: `${base}images/photos/photo4.webp`, alt: 'Facundo y Delfina en el jardín' },
-  { src: `${base}images/photos/photo1.webp`, alt: 'Los novios abrazados al atardecer' },
-  { src: `${base}images/photos/photo2.webp`, alt: 'Retrato de los novios entre flores' },
-  { src: `${base}images/photos/photo3.webp`, alt: 'Los novios caminando de la mano' },
+  { src: `${base}Fotos/fachadas/carmelo.jpg`, alt: 'Fachada de la Iglesia Adventista El Carmelo' },
+  { src: `${base}Fotos/leyendo-biblia/asb4556.jpg`, alt: 'Hermano leyendo la Biblia' },
+  { src: `${base}Fotos/orando/asb4804.jpg`, alt: 'Hermana orando' },
+  { src: `${base}Fotos/bautizando/dsc01464.jpg`, alt: 'Bautismo en la iglesia' },
+  { src: `${base}Fotos/zamar/dsc02205.jpg`, alt: 'Grupo Zamar' },
+
+  { src: `${base}Fotos/fachadas/distrito-betania.jpg`, alt: 'Fachada de la Iglesia Adventista Distrito Betania' },
+  { src: `${base}Fotos/leyendo-biblia/dsc01944.jpg`, alt: 'Biblia abierta durante la lectura' },
+  { src: `${base}Fotos/orando/asb4805.jpg`, alt: 'Hermana orando' },
+  { src: `${base}Fotos/bautizando/dsc04637.jpg`, alt: 'Pastor bautizando' },
+  { src: `${base}Fotos/zamar/dsc02207.jpg`, alt: 'Grupo Zamar' },
+
+  { src: `${base}Fotos/fachadas/palestina.jpg`, alt: 'Fachada de la Iglesia Adventista Palestina' },
+  { src: `${base}Fotos/leyendo-biblia/dsc01968.jpg`, alt: 'Hermano leyendo la Biblia' },
+  { src: `${base}Fotos/orando/dsc04494.jpg`, alt: 'Hermana orando' },
+  { src: `${base}Fotos/bautizando/dsc04639.jpg`, alt: 'Pastor bautizando' },
+  { src: `${base}Fotos/zamar/dsc02209.jpg`, alt: 'Grupo Zamar' },
+
+  { src: `${base}Fotos/leyendo-biblia/img-4633.jpg`, alt: 'Biblia abierta' },
+  { src: `${base}Fotos/orando/dsc04496.jpg`, alt: 'Hermano orando' },
+  { src: `${base}Fotos/leyendo-biblia/img-9723.jpg`, alt: 'Manos sosteniendo la Biblia' },
 ]
 
-export const envelopePhoto = `${base}images/photos/photo1.webp`
-
-export type Wish = {
-  id: string
-  name: string
-  message: string
-  date: string
-}
-
-export const seedWishes: Wish[] = [
-  {
-    id: 'w1',
-    name: 'Don Guillermo',
-    message: 'Que su casa esté siempre llena de gente querida.',
-    date: '23/3/2027, 9:00:00',
-  },
-  {
-    id: 'w2',
-    name: 'Gabriela y Tomás',
-    message: 'Muchas felicidades. Se ganaron esta fiesta y mucho más.',
-    date: '24/3/2027, 10:00:00',
-  },
-  {
-    id: 'w3',
-    name: 'Familia Arteaga',
-    message: 'Ojalá la vida les dé la mitad de lo que ustedes dan a los demás.',
-    date: '25/3/2027, 11:00:00',
-  },
-  {
-    id: 'w4',
-    name: 'Los tíos de Guadalajara',
-    message: 'Brindamos por ustedes, hoy y siempre.',
-    date: '26/3/2027, 12:00:00',
-  },
-  {
-    id: 'w5',
-    name: 'Lucía Hernández',
-    message: 'Que lo bueno se multiplique y lo difícil se comparta.',
-    date: '27/3/2027, 13:00:00',
-  },
-  {
-    id: 'w6',
-    name: 'Ricardo Ponce',
-    message: 'Fue un día inolvidable. Gracias por tanto.',
-    date: '28/3/2027, 14:00:00',
-  },
-  {
-    id: 'w7',
-    name: 'Familia Villalobos',
-    message: 'Que sigan siendo ese equipo que todos admiramos.',
-    date: '29/3/2027, 15:00:00',
-  },
-  {
-    id: 'w8',
-    name: 'Adriana y Óscar',
-    message: 'Felicidades a las dos familias. Hoy ganamos todos.',
-    date: '30/3/2027, 16:00:00',
-  },
-]
-
-export const wishSuggestions = [
-  'Que su amor siga creciendo con cada amanecer compartido.',
-  'Gracias por invitarnos a celebrar algo tan bonito. ¡Salud!',
-  'Que nunca les falten motivos para reír juntos.',
-  'Hoy empieza la mejor parte de su historia.',
-  'Brindamos por ustedes y por todos los días que vienen.',
-]
+export const envelopePhoto = `${base}Fotos/fachadas/carmelo.jpg`

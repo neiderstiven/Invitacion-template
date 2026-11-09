@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react'
 import { useEffect, useRef, useState } from 'react'
-import { THEME, wedding } from '../data/invitation'
+import { THEME, invitation, qrImage } from '../data/invitation'
 
 type Sparkle = {
   top: string
@@ -38,11 +38,7 @@ const decor = [
   { src: 'chateau_green', left: 118, top: 176, width: 40, rotate: -14 },
 ]
 
-type GiftBoxProps = {
-  qrDataUrl: string
-}
-
-export function GiftBox({ qrDataUrl }: GiftBoxProps) {
+export function GiftBox() {
   const [open, setOpen] = useState(false)
   const [burst, setBurst] = useState(0)
   const dialogRef = useRef<HTMLDialogElement | null>(null)
@@ -74,16 +70,23 @@ export function GiftBox({ qrDataUrl }: GiftBoxProps) {
         style={{ backgroundColor: 'transparent' }}
       >
         <h2
-          className="mb-4 flex flex-col items-center font-title text-[20px] font-bold uppercase text-ink"
+          className="mb-3 flex flex-col items-center text-center font-title text-[20px] font-bold uppercase text-ink"
           style={{ letterSpacing: '0.03em' }}
         >
-          Caja de Regalos
+          {invitation.participation.title}
         </h2>
+
+        <p
+          className="mx-auto mb-4 max-w-[340px] text-center text-[13px] leading-relaxed md:max-w-[460px] md:text-[15px]"
+          style={{ color: 'rgba(89, 61, 44, 0.72)', fontFamily: 'Baskerville, "Times New Roman", serif' }}
+        >
+          {invitation.participation.paragraph}
+        </p>
 
         <button
           type="button"
           onClick={handleOpen}
-          aria-label="Abrir caja de regalos"
+          aria-label="Abrir QR de donación"
           className="group relative h-[280px] w-[260px] cursor-pointer border-none bg-transparent outline-none"
         >
           <div className="relative flex h-full w-full items-end justify-center pb-[26px]">
@@ -195,59 +198,29 @@ export function GiftBox({ qrDataUrl }: GiftBoxProps) {
               className="font-title text-[20px] font-bold uppercase text-white"
               style={{ letterSpacing: '0.03em', textShadow: '1px 1px 2px rgba(0,0,0,0.2)' }}
             >
-              Caja de Regalos
+              {invitation.participation.qrLabel}
             </h2>
           </div>
 
           <div className="p-4 sm:p-6">
-            <div className="flex flex-col items-center gap-4 sm:flex-row sm:flex-wrap sm:items-start sm:justify-center" style={{ color: '#593D2C' }}>
-              <div className="flex max-w-[180px] flex-col items-center sm:max-w-none">
-                <div className="mb-2 flex min-h-[2.5rem] items-start gap-1.5">
-                  <svg viewBox="0 0 24 24" className="h-5 w-5 object-contain" aria-hidden="true">
-                    <path fill="#003087" d="M7.1 21.2H3.3L6.2 2.8h4.7c2.3 0 3.9.5 4.7 1.5.8 1 1.1 2.4.8 4.3-.4 2.4-1.3 4.1-2.7 5.2-1.3 1-3.1 1.6-5.3 1.6H6.3l-.9 5.8Zm1.6-9.9h1.5c1.1 0 1.9-.3 2.4-.8.5-.5.9-1.3 1.1-2.5.2-1.1.1-1.9-.2-2.3-.4-.5-1-.7-2-.7H9.6l-.9 6.3Z" />
-                    <path fill="#009CDE" d="M20.2 7.1c-1.4-.5-3.1-.7-4.9-.7h-1.2l-.5 3.3h1.5c1.1 0 2 .2 2.5.6.6.4.8 1 .7 2-.2 2.4-1.2 4.1-2.9 5.2-1.2.8-2.8 1.2-4.6 1.2H9l-.4 2.5h3.7c2.7 0 4.8-.6 6.3-1.9 1.5-1.3 2.4-3.2 2.8-5.7.3-2.1 0-3.5-1.2-4.4-.3-.2-.6-.4-1-.5Z" />
-                  </svg>
-                  <h3 className="line-clamp-2 text-balance text-center text-sm font-medium" style={{ color: '#593D2C' }}>
-                    Novio - PayPal
-                  </h3>
-                </div>
-
-                <div
-                  className="flex h-44 w-44 items-center justify-center rounded-xl bg-white p-2 shadow-lg sm:h-48 sm:w-48"
-                  style={{ border: '2px solid #593D2C20' }}
-                >
-                  <img src={qrDataUrl} alt="Código QR de PayPal" className="h-full w-full object-contain" />
-                </div>
-
-                <div className="mt-3 space-y-0.5 text-center">
-                  <p className="break-all font-mono text-xs" style={{ color: '#593D2C' }}>
-                    {wedding.gift.paypalHandle}
-                  </p>
-                </div>
-
-                <div className="mt-2 flex flex-wrap justify-center gap-1.5">
-                  <a
-                    href={wedding.gift.paypalUrl}
-                    target="_blank"
-                    rel="nofollow noopener noreferrer"
-                    className="inline-flex shrink-0 items-center gap-1 whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-medium text-white transition-colors"
-                    style={{ backgroundColor: '#003087' }}
-                  >
-                    PayPal
-                  </a>
-                  <a
-                    href={qrDataUrl}
-                    download="regalo-paypal.png"
-                    className="inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-medium transition-colors"
-                    style={{ color: '#593D2C', backgroundColor: '#593D2C15' }}
-                  >
-                    <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                    </svg>
-                    Guardar QR
-                  </a>
-                </div>
+            <div className="flex flex-col items-center gap-4" style={{ color: '#593D2C' }}>
+              <div
+                className="flex w-full max-w-[300px] items-center justify-center rounded-xl bg-white p-3 shadow-lg"
+                style={{ border: '2px solid #593D2C20' }}
+              >
+                <img
+                  src={qrImage}
+                  alt="Código QR de donación"
+                  className="h-auto w-full object-contain"
+                />
               </div>
+
+              <p
+                className="text-center text-sm"
+                style={{ color: '#593D2C', fontFamily: 'Baskerville, "Times New Roman", serif' }}
+              >
+                {invitation.participation.qrLabel}
+              </p>
             </div>
           </div>
         </dialog>

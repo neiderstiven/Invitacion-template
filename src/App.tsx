@@ -1,37 +1,20 @@
 import { useEffect, useState } from 'react'
-import QRCode from 'qrcode'
 import { Ceremony } from './components/Ceremony'
 import { Cover } from './components/Cover'
-import { DressCode, Program } from './components/Schedule'
 import { Gallery } from './components/Gallery'
 import { GiftBox } from './components/GiftBox'
-import { Guestbook } from './components/Guestbook'
 import { Hero } from './components/Hero'
 import { Lightbox } from './components/Lightbox'
-import { Location } from './components/Location'
 import { Petals } from './components/Petals'
 import { Reception } from './components/Reception'
-import { wedding } from './data/invitation'
-
-const OPEN_STORAGE_KEY = 'cdc-invitation-open'
-
-function readInitialOpenState() {
-  if (typeof window === 'undefined') return false
-  const params = new URLSearchParams(window.location.search)
-  if (params.get('open') === '1') return true
-  return window.sessionStorage.getItem(OPEN_STORAGE_KEY) === '1'
-}
+import { invitation } from './data/invitation'
 
 export default function App() {
-  const [opened, setOpened] = useState(readInitialOpenState)
+  const [opened, setOpened] = useState(false)
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
-  const [qrDataUrl, setQrDataUrl] = useState('')
 
   useEffect(() => {
-    if (opened) {
-      window.sessionStorage.setItem(OPEN_STORAGE_KEY, '1')
-      return
-    }
+    if (opened) return
     const previousOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
     return () => {
@@ -39,22 +22,8 @@ export default function App() {
     }
   }, [opened])
 
-  useEffect(() => {
-    QRCode.toDataURL(wedding.gift.paypalUrl, {
-      errorCorrectionLevel: 'M',
-      margin: 1,
-      width: 480,
-      color: { dark: '#593D2C', light: '#ffffff' },
-    })
-      .then(setQrDataUrl)
-      .catch(() => setQrDataUrl(''))
-  }, [])
-
   const handleOpen = () => {
     setOpened(true)
-    const url = new URL(window.location.href)
-    url.searchParams.set('open', '1')
-    window.history.replaceState({}, '', url.toString())
     window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior })
   }
 
@@ -63,7 +32,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen w-full bg-white">
+    <div className="fade-up min-h-screen w-full bg-white">
       <main className="min-h-screen w-full">
         <div className="flex w-full justify-center overflow-x-clip bg-white">
           <div
@@ -76,40 +45,40 @@ export default function App() {
             />
             <Petals className="z-[1] opacity-40" />
 
-            <div className="fade-up relative z-10">
+            <div className="relative z-10">
               <Hero />
               <Ceremony />
               <Gallery onOpenLightbox={setLightboxIndex} />
               <Reception />
+              <GiftBox />
 
-              <div className="relative z-10 mt-6 flex w-full flex-col items-center justify-center">
-                <a
-                  href="#libro-de-visitas"
-                  className="inline-flex items-center justify-center rounded-full border px-7 py-1.5 text-[13px] uppercase tracking-wide text-cream transition-transform hover:scale-[1.03]"
-                  style={{
-                    backgroundColor: '#593D2C',
-                    borderColor: '#593D2C',
-                    fontFamily: '"Times New Roman", serif',
-                  }}
-                >
-                  CONFIRMAR ASISTENCIA
-                </a>
-              </div>
-
-              <Location />
-              <DressCode />
-              <Program />
-
-              <Guestbook />
-              <GiftBox qrDataUrl={qrDataUrl} />
-
-              <footer className="relative z-10 flex flex-col items-center px-6 pb-6 text-center">
-                <span
-                  className="mx-auto flex flex-col items-center gap-1 whitespace-pre-line text-[11px] md:max-w-[560px] md:text-[13px]"
+              <footer className="relative z-10 flex flex-col items-center gap-3 px-6 pb-8 pt-4 text-center">
+                <p
+                  className="mx-auto max-w-[340px] text-[12px] leading-relaxed md:max-w-[520px] md:text-[14px]"
                   style={{ color: '#593D2C', fontFamily: '"Times New Roman", serif' }}
                 >
-                  {wedding.gift.note}
-                </span>
+                  {invitation.event.closing}
+                </p>
+
+                <div
+                  aria-hidden="true"
+                  className="mt-1 h-px w-14"
+                  style={{ backgroundColor: 'rgba(89, 61, 44, 0.25)' }}
+                />
+
+                <p
+                  className="font-title text-[13px] font-semibold tracking-wide md:text-[14px]"
+                  style={{ color: '#593D2C' }}
+                >
+                  {invitation.event.verse.reference}
+                </p>
+
+                <p
+                  className="mx-auto max-w-[340px] text-[13px] italic leading-relaxed md:max-w-[520px] md:text-[15px]"
+                  style={{ color: 'rgba(89, 61, 44, 0.8)', fontFamily: 'Baskerville, "Times New Roman", serif' }}
+                >
+                  {invitation.event.verse.text}
+                </p>
               </footer>
 
               <div className="relative z-20 flex items-center justify-center pb-3">

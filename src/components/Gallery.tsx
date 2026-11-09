@@ -41,7 +41,7 @@ export function Gallery({ onOpenLightbox }: GalleryProps) {
           className="relative z-10 text-center font-title text-[20px] font-bold uppercase text-ink"
           style={{ letterSpacing: '0.03em' }}
         >
-          Galería de Fotos
+          fotos
         </h2>
 
         <div className="relative z-10 mt-5 w-full max-w-[380px] md:max-w-[600px]">

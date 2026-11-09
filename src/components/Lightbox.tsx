@@ -32,7 +32,7 @@ export function Lightbox({ index, onClose, onIndexChange }: LightboxProps) {
     <div
       role="dialog"
       aria-modal="true"
-      aria-label="Galería de fotos"
+      aria-label="fotos"
       className="fixed inset-0 z-[999] flex flex-col items-center bg-black/92 px-2 pb-4 pt-10 backdrop-blur-sm sm:px-4 sm:pb-6 sm:pt-12"
     >
       <button
