@@ -34,8 +34,11 @@ export const invitation = {
   participation: {
     title: 'Invitación de participación',
     paragraph:
-      'Queremos con gratitud que nos unamos en una ofrenda que sin duda fortalecera nuestra Asociación.',
+      'Queremos con gratitud que nos unamos en una ofrenda que sin duda fortalecerá nuestra Asociación.',
     qrLabel: 'QR de donación',
+    donationLabel: 'ALFOLI DIGITAL',
+    donationUrl: 'https://mialfoliadventista.org/',
+    donationHint: 'Elige la opción Sede Asoc. Sur de Bogotá / en otros escribir cumpleaños',
   },
   calendarUrl:
     'https://www.google.com/calendar/render?action=TEMPLATE&text=15%20A%C3%B1os%20-%20Asociaci%C3%B3n%20Sur%20de%20Bogot%C3%A1&dates=20261212/20261213&details=La%20Asociaci%C3%B3n%20Sur%20de%20Bogot%C3%A1%20tiene%20el%20privilegio%20de%20invitarte%20a%20celebrar%20juntos%20con%20gratitud%2015%20a%C3%B1os%20de%20bondad%2C%20cuidado%20y%20misericordia.',
@@ -43,6 +46,7 @@ export const invitation = {
 
 export const logoImage = encodeURI(`${base}Fotos/LOGO 15 AÑOS.png`)
 export const qrImage = encodeURI(`${base}Fotos/Pago QR.png`)
+export const musicTrack = `${base}audio/we-win-inspirational-piano.mp3`
 
 export const photos = [
   { src: `${base}Fotos/fachadas/carmelo.jpg`, alt: 'Fachada de la Iglesia Adventista El Carmelo' },
@@ -68,4 +72,4 @@ export const photos = [
   { src: `${base}Fotos/leyendo-biblia/img-9723.jpg`, alt: 'Manos sosteniendo la Biblia' },
 ]
 
-export const envelopePhoto = `${base}Fotos/fachadas/carmelo.jpg`
+export const envelopePhoto = `${base}Fotos/fachada-asociacion.jpg`

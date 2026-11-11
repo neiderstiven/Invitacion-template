@@ -1,6 +1,7 @@
 import type { CSSProperties } from 'react'
 import { useEffect, useRef, useState } from 'react'
 import { THEME, invitation, qrImage } from '../data/invitation'
+import { MastercardMark, VisaMark } from './PaymentMarks'
 
 type Sparkle = {
   top: string
@@ -56,7 +57,10 @@ export function GiftBox() {
   }
 
   return (
-    <div className="relative isolate z-10 overflow-x-clip">
+    <section
+      aria-labelledby="participation-title"
+      className="relative isolate z-10 overflow-x-clip"
+    >
       <img
         src={`${THEME}/castle2-background.webp`}
         alt=""
@@ -65,29 +69,27 @@ export function GiftBox() {
         style={{ opacity: 0.15 }}
       />
 
-      <div
-        className="relative z-20 flex flex-col items-center justify-center px-6 pb-10 pt-8"
-        style={{ backgroundColor: 'transparent' }}
-      >
+      <div className="relative z-20 mx-auto flex w-full max-w-[480px] flex-col items-center px-6 pb-14 pt-10 text-center md:max-w-[560px] md:pb-16 md:pt-12">
         <h2
-          className="mb-3 flex flex-col items-center text-center font-title text-[20px] font-bold uppercase text-ink"
+          id="participation-title"
+          className="text-center font-title text-[20px] font-bold uppercase text-ink md:text-[22px]"
           style={{ letterSpacing: '0.03em' }}
         >
           {invitation.participation.title}
         </h2>
 
-        <p
-          className="mx-auto mb-4 max-w-[340px] text-center text-[13px] leading-relaxed md:max-w-[460px] md:text-[15px]"
-          style={{ color: 'rgba(89, 61, 44, 0.72)', fontFamily: 'Baskerville, "Times New Roman", serif' }}
-        >
-          {invitation.participation.paragraph}
-        </p>
+        <img
+          src={`${THEME}/goldenline2-decoration.webp`}
+          alt=""
+          aria-hidden="true"
+          className="mt-4 block w-[64px] max-w-none object-contain md:w-[78px]"
+        />
 
         <button
           type="button"
           onClick={handleOpen}
           aria-label="Abrir QR de donación"
-          className="group relative h-[280px] w-[260px] cursor-pointer border-none bg-transparent outline-none"
+          className="group relative mt-5 h-[280px] w-[260px] cursor-pointer border-none bg-transparent outline-none"
         >
           <div className="relative flex h-full w-full items-end justify-center pb-[26px]">
             {sparkles.map((sparkle, index) => (
@@ -177,54 +179,124 @@ export function GiftBox() {
           </p>
         </button>
 
-        <dialog
-          ref={dialogRef}
-          onClose={() => setOpen(false)}
-          className="m-auto w-full max-w-lg rounded-2xl p-0 backdrop:bg-black/50 sm:max-w-xl"
-          style={{ backgroundColor: '#f7f5ee' }}
+        <p
+          className="mx-auto mt-6 max-w-[340px] text-center text-[14px] leading-[1.75] md:max-w-[440px] md:text-[16px]"
+          style={{ color: 'rgba(89, 61, 44, 0.78)', fontFamily: 'Baskerville, "Times New Roman", serif' }}
         >
-          <div className="relative px-6 pb-4 pt-6 text-center" style={{ backgroundColor: '#593D2C' }}>
-            <button
-              type="button"
-              onClick={() => setOpen(false)}
-              aria-label="Cerrar"
-              className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full text-white/80 transition-colors hover:bg-white/20 hover:text-white"
+          {invitation.participation.paragraph}
+        </p>
+
+        <div className="mt-10 flex flex-col items-center gap-4 md:mt-12">
+          <div
+            aria-hidden="true"
+            className="h-px w-16"
+            style={{ backgroundColor: 'rgba(89, 61, 44, 0.25)' }}
+          />
+
+          <p
+            className="mx-auto max-w-[340px] text-[14px] leading-[1.8] md:max-w-[480px] md:text-[16px]"
+            style={{ color: '#593D2C', fontFamily: '"Times New Roman", serif' }}
+          >
+            {invitation.event.closing}
+          </p>
+
+          <p
+            className="font-title text-[14px] font-semibold tracking-wide md:text-[15px]"
+            style={{ color: '#593D2C' }}
+          >
+            {invitation.event.verse.reference}
+          </p>
+
+          <p
+            className="mx-auto max-w-[340px] text-[15px] italic leading-[1.85] md:max-w-[480px] md:text-[17px]"
+            style={{ color: 'rgba(89, 61, 44, 0.82)', fontFamily: 'Baskerville, "Times New Roman", serif' }}
+          >
+            {invitation.event.verse.text}
+          </p>
+        </div>
+      </div>
+
+      <dialog
+        ref={dialogRef}
+        onClose={() => setOpen(false)}
+        className="m-auto w-full max-w-lg rounded-2xl p-0 backdrop:bg-black/50 sm:max-w-xl"
+        style={{ backgroundColor: '#f7f5ee' }}
+      >
+        <div className="relative px-6 pb-4 pt-6 text-center" style={{ backgroundColor: '#593D2C' }}>
+          <button
+            type="button"
+            onClick={() => setOpen(false)}
+            aria-label="Cerrar"
+            className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full text-white/80 transition-colors hover:bg-white/20 hover:text-white"
+          >
+            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          <h2
+            className="font-title text-[20px] font-bold uppercase text-white"
+            style={{ letterSpacing: '0.03em', textShadow: '1px 1px 2px rgba(0,0,0,0.2)' }}
+          >
+            {invitation.participation.qrLabel}
+          </h2>
+        </div>
+
+        <div className="p-4 sm:p-6">
+          <div className="flex flex-col items-center gap-4" style={{ color: '#593D2C' }}>
+            <div
+              className="flex w-full max-w-[300px] items-center justify-center rounded-xl bg-white p-3 shadow-lg"
+              style={{ border: '2px solid #593D2C20' }}
             >
-              <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-            <h2
-              className="font-title text-[20px] font-bold uppercase text-white"
-              style={{ letterSpacing: '0.03em', textShadow: '1px 1px 2px rgba(0,0,0,0.2)' }}
+              <img src={qrImage} alt="Código QR de donación" className="h-auto w-full object-contain" />
+            </div>
+
+            <p
+              className="text-center text-sm"
+              style={{ color: '#593D2C', fontFamily: 'Baskerville, "Times New Roman", serif' }}
             >
               {invitation.participation.qrLabel}
-            </h2>
-          </div>
+            </p>
 
-          <div className="p-4 sm:p-6">
-            <div className="flex flex-col items-center gap-4" style={{ color: '#593D2C' }}>
-              <div
-                className="flex w-full max-w-[300px] items-center justify-center rounded-xl bg-white p-3 shadow-lg"
-                style={{ border: '2px solid #593D2C20' }}
+            <div
+              aria-hidden="true"
+              className="h-px w-14"
+              style={{ backgroundColor: 'rgba(89, 61, 44, 0.22)' }}
+            />
+
+            <div className="flex w-full flex-col items-center gap-2">
+              <a
+                href={invitation.participation.donationUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex w-full max-w-[280px] items-center justify-center rounded-full px-6 py-3 font-title text-[13px] font-semibold uppercase text-cream shadow-md transition-transform duration-300 hover:scale-[1.03] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink md:text-[14px]"
+                style={{
+                  backgroundColor: '#593D2C',
+                  letterSpacing: '0.16em',
+                  boxShadow: '0 4px 14px rgba(89, 61, 44, 0.3)',
+                }}
               >
-                <img
-                  src={qrImage}
-                  alt="Código QR de donación"
-                  className="h-auto w-full object-contain"
-                />
-              </div>
+                {invitation.participation.donationLabel}
+              </a>
 
               <p
-                className="text-center text-sm"
-                style={{ color: '#593D2C', fontFamily: 'Baskerville, "Times New Roman", serif' }}
+                className="max-w-[280px] text-center text-[12.5px] leading-relaxed md:text-[13.5px]"
+                style={{ color: 'rgba(89, 61, 44, 0.75)', fontFamily: 'Baskerville, "Times New Roman", serif' }}
               >
-                {invitation.participation.qrLabel}
+                {invitation.participation.donationHint}
               </p>
             </div>
+
+            <div
+              role="group"
+              aria-label="Métodos de pago aceptados"
+              className="flex items-center justify-center gap-3"
+            >
+              <VisaMark />
+              <MastercardMark />
+            </div>
           </div>
-        </dialog>
-      </div>
-    </div>
+        </div>
+      </dialog>
+    </section>
   )
 }
